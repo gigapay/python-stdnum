@@ -22,3 +22,4 @@
 
 # provide vat as an alias
 from stdnum.ee import kmkr as vat  # noqa: F401
+from stdnum.ee import ik as personal_tin  # noqa: F401

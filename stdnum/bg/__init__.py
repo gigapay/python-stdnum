@@ -19,3 +19,5 @@
 # 02110-1301 USA
 
 """Collection of Bulgarian numbers."""
+
+from stdnum.bg import egn as personal_tin  # noqa: F401

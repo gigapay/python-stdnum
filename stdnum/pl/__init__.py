@@ -22,3 +22,4 @@
 
 # provide vat as an alias
 from stdnum.pl import nip as vat  # noqa: F401
+from stdnum.pl import pesel as personal_tin  # noqa: F401

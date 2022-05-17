@@ -24,3 +24,4 @@
 from stdnum.se import personnummer as personalid  # noqa: F401
 from stdnum.se import postnummer as postal_code  # noqa: F401
 from stdnum.se import orgnr as businessid  # noqa: F401
+from stdnum.se import personnummer as personal_tin  # noqa: F401

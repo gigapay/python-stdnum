@@ -22,3 +22,4 @@
 
 # provide vat as an alias
 from stdnum.hr import oib as vat  # noqa: F401
+from stdnum.hr import oib as personal_tin  # noqa: F401

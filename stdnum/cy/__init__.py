@@ -19,3 +19,5 @@
 # 02110-1301 USA
 
 """Collection of Cypriot numbers."""
+
+from stdnum.cy import vat as business_tin  # noqa: F401

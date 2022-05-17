@@ -22,3 +22,4 @@
 
 # provide vat as an alias
 from stdnum.lt import pvm as vat  # noqa: F401
+from stdnum.lt import asmens as personal_tin  # noqa: F401

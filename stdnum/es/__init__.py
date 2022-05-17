@@ -22,3 +22,4 @@
 
 # provide vat as an alias
 from stdnum.es import nif as vat  # noqa: F401
+from stdnum.es import nif as personal_tin  # noqa: F401

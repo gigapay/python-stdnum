@@ -23,3 +23,4 @@
 # provide aliases
 from stdnum.nl import btw as vat  # noqa: F401
 from stdnum.nl import postcode as postal_code  # noqa: F401
+from stdnum.nl import bsn as personal_tin  # noqa: F401

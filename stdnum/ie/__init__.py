@@ -19,3 +19,5 @@
 # 02110-1301 USA
 
 """Collection of Irish numbers."""
+
+from stdnum.ie import pps as personal_tin  # noqa: F401

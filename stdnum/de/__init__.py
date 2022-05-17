@@ -22,3 +22,4 @@
 
 # provide businessid as an alias
 from stdnum.de import handelsregisternummer as businessid  # noqa: F401
+from stdnum.de import stnr as personal_tin  # noqa: F401
