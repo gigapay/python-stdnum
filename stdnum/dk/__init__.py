@@ -24,3 +24,4 @@
 from stdnum.dk import cpr as personalid  # noqa: F401
 from stdnum.dk import cvr as vat  # noqa: F401
 from stdnum.dk import cpr as personal_tin  # noqa: F401
+from stdnum.dk import cvr as business_tin  # noqa: F401

@@ -19,3 +19,5 @@
 # 02110-1301 USA
 
 """Collection of Greek numbers."""
+
+from stdnum.gr import vat as business_tin  # noqa: F401

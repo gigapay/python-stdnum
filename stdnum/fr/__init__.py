@@ -23,3 +23,4 @@
 # provide vat as an alias
 from stdnum.fr import tva as vat  # noqa: F401
 from stdnum.fr import nif as personal_tin  # noqa: F401
+from stdnum.fr import siren as business_tin  # noqa: F401

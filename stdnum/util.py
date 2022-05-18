@@ -228,6 +228,9 @@ def get_module_description(module):
 
 
 def get_cc_module(cc, name):
+    if cc == 'el':
+        cc = 'gr'
+
     """Find the country-specific named module."""
     cc = cc.lower()
     # add suffix for python reserved words

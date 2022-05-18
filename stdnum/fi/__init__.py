@@ -25,3 +25,4 @@ from stdnum.fi import alv as vat  # noqa: F401
 from stdnum.fi import hetu as personalid  # noqa: F401
 from stdnum.fi import ytunnus as businessid  # noqa: F401
 from stdnum.fi import hetu as personal_tin  # noqa: F401
+from stdnum.fi import ytunnus as business_tin  # noqa: F401
