@@ -22,4 +22,5 @@
 
 # provide vat as an alias
 from stdnum.ro import cf as vat  # noqa: F401
-from stdnum.ro import cf as personal_tin  # noqa: F401
+from stdnum.ro import cnp as personal_tin  # noqa: F401
+from stdnum.ro import cf as business_tin  # noqa: F401
