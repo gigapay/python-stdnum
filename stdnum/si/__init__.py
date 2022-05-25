@@ -23,3 +23,4 @@
 # provide vat as an alias
 from stdnum.si import ddv as vat  # noqa: F401
 from stdnum.si import ddv as business_tin  # noqa: F401
+from stdnum.si import ddv as personal_tin  # noqa: F401
