@@ -22,3 +22,4 @@
 
 # provide vat as an alias
 from stdnum.lv import pvn as vat  # noqa: F401
+from stdnum.lv import pvn as business_tin  # noqa: F401
