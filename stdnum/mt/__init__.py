@@ -19,3 +19,7 @@
 # 02110-1301 USA
 
 """Collection of Maltese numbers."""
+
+from stdnum.mt import vat as vat  # noqa: F401
+from stdnum.mt import personal_tin as personal_tin  # noqa: F401
+from stdnum.mt import business_tin as business_tin  # noqa: F401

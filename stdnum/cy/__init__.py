@@ -20,4 +20,5 @@
 
 """Collection of Cypriot numbers."""
 
-from stdnum.cy import vat as business_tin  # noqa: F401
+from stdnum.cy import personal_tin as business_tin  # noqa: F401
+from stdnum.cy import personal_tin as personal_tin  # noqa: F401

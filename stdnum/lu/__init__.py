@@ -22,3 +22,6 @@
 
 # provide vat as an alias
 from stdnum.lu import tva as vat  # noqa: F401
+from stdnum.lu import personal_tin as personal_tin  # noqa: F401
+from stdnum.lu import tva as business_tin  # noqa: F401
+

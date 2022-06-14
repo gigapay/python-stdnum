@@ -23,3 +23,4 @@
 # provide vat as an alias
 from stdnum.hu import anum as vat  # noqa: F401
 from stdnum.hu import business_tin as business_tin  # noqa: F401
+from stdnum.hu import personal_tin as personal_tin  # noqa: F401
