@@ -49,6 +49,11 @@ def validate(number):
     return alv.validate(number)
 
 
+def checksum(number):
+    """Calculate the checksum."""
+    return alv.checksum(number)
+
+
 def is_valid(number):
     """Check if the number is a valid business identifier."""
     try:
