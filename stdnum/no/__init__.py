@@ -23,4 +23,4 @@
 # provide aliases
 from stdnum.no import fodselsnummer as personalid  # noqa: F401
 from stdnum.no import mva as vat  # noqa: F401
-from stdnum.no import organisasjonsnummer as business_tin  # noqa: F401
+from stdnum.no import orgnr as business_tin  # noqa: F401
