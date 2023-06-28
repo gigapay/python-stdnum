@@ -19,3 +19,5 @@
 # 02110-1301 USA
 
 """Collection of Swiss numbers."""
+from stdnum.ch import uid as business_tin
+from stdnum.ch import ssn as personal_tin
