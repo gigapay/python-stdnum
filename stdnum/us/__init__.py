@@ -19,3 +19,5 @@
 # 02110-1301 USA
 
 """Collection of United States numbers."""
+
+from stdnum.us import ein as business_tin
