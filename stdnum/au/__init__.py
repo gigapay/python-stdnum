@@ -22,3 +22,5 @@
 
 # provide aliases
 from stdnum.au import abn as vat  # noqa: F401
+from stdnum.au import tfn as business_tin  # noqa: F401
+from stdnum.au import tfn as personal_tin  # noqa: F401
