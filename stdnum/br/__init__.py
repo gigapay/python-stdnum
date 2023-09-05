@@ -20,3 +20,5 @@
 
 """Collection of Brazilian numbers."""
 from stdnum.br import cnpj as vat  # noqa: F401
+from stdnum.br import cnpj as business_tin
+from stdnum.br import cpf as personal_tin
