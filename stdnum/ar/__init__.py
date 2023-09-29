@@ -23,3 +23,5 @@
 # provide aliases
 from stdnum.ar import cuit as vat  # noqa: F401
 from stdnum.ar import dni as personalid  # noqa: F401
+from stdnum.ar import cuit as business_tin  # noqa: F401
+from stdnum.ar import cuit as personal_tin  # noqa: F401
