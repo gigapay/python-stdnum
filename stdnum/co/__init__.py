@@ -23,3 +23,5 @@
 # provide vat and rut as an alias
 from stdnum.co import nit as vat  # noqa: F401, isort:skip
 from stdnum.co import nit as rut  # noqa: F401, isort:skip
+from stdnum.co import nit as personal_tin  # noqa: F401, isort:skip
+from stdnum.co import nit as business_tin  # noqa: F401, isort:skip
