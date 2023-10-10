@@ -1,4 +1,4 @@
-# __init__.py - collection of Japanese numbers
+# my_number.py - functions for handling Japanese identity Number
 # coding: utf-8
 #
 # Copyright (C) 2019 Alan Hettinger
@@ -18,7 +18,28 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 # 02110-1301 USA
 
-"""Collection of Japanese numbers."""
-from stdnum.jp import cn as vat  # noqa: F401
-from stdnum.jp import cn as business_tin  # noqa: F401
-from stdnum.jp import my_number as personal_tin
+
+from stdnum.exceptions import *
+from stdnum.util import clean
+
+
+def compact(number):
+    """Convert the number to the minimal representation. This strips the
+    number of any valid separators and removes surrounding whitespace."""
+    return clean(number, "- ").strip()
+
+
+def validate(number):
+    """Check if the number is valid. This checks the length."""
+    number = compact(number)
+    if len(number) != 12:
+        raise InvalidLength()
+    return number
+
+
+def is_valid(number):
+    """Check if the number is a valid."""
+    try:
+        return bool(validate(number))
+    except ValidationError:
+        return False
