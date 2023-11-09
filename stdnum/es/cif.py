@@ -53,14 +53,20 @@ InvalidFormat: ...
 from stdnum import luhn
 from stdnum.es import dni
 from stdnum.exceptions import *
-from stdnum.util import isdigits
+from stdnum.util import isdigits, clean
 
 
-__all__ = ['compact', 'validate', 'is_valid', 'split']
+__all__ = ["compact", "validate", "is_valid", "split"]
 
 
 # use the same compact function as DNI
-compact = dni.compact
+def compact(number):
+    """Convert the number to the minimal representation. This strips the
+    number of any valid separators and removes surrounding whitespace."""
+    number = clean(number, " -").upper().strip()
+    if number.startswith("ES"):
+        number = number[2:]
+    return dni.compact(number)
 
 
 def calc_check_digits(number):
@@ -68,7 +74,7 @@ def calc_check_digits(number):
     passed should not have the check digit included. This function returns
     both the number and character check digit candidates."""
     check = luhn.calc_check_digit(number[1:])
-    return check + 'JABCDEFGHI'[int(check)]
+    return check + "JABCDEFGHI"[int(check)]
 
 
 def validate(number):
@@ -79,7 +85,7 @@ def validate(number):
         raise InvalidFormat()
     if len(number) != 9:
         raise InvalidLength()
-    if number[0] in 'ABCDEFGHJNPQRSUVW':
+    if number[0] in "ABCDEFGHJNPQRSUVW":
         # there seems to be conflicting information on which organisation types
         # should have which type of check digit (alphabetic or numeric) so
         # we support either here
