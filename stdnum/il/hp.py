@@ -56,7 +56,10 @@ from stdnum.util import clean, isdigits
 def compact(number):
     """Convert the number to the minimal representation. This strips the
     number of any separators and removes surrounding whitespace."""
-    return clean(number, ' -').strip()
+    number = clean(number, " -").upper().strip()
+    if number.startswith("IL"):
+        number = number[2:]
+    return number
 
 
 def validate(number):
@@ -67,7 +70,7 @@ def validate(number):
         raise InvalidLength()
     if not isdigits(number) or int(number) <= 0:
         raise InvalidFormat()
-    if number[0] != '5':
+    if number[0] != "5":
         raise InvalidComponent()
     luhn.validate(number)
     return number
