@@ -22,3 +22,5 @@
 
 # provide aliases
 from stdnum.il import hp as vat  # noqa: F401
+from stdnum.il import hp as business_tin
+from stdnum.il import idnr as personal_tin
