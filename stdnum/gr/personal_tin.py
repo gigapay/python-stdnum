@@ -17,7 +17,7 @@ def validate(number):
     number = compact(number)
     if len(number) != 9:
         raise InvalidLength()
-    if isdigits(number):
+    if not isdigits(number):
         raise InvalidFormat()
     return number
 
