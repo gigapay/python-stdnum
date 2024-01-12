@@ -22,3 +22,5 @@
 
 # provide aliases
 from stdnum.nz import ird as vat  # noqa: F401
+from stdnum.nz import ird as personal_tin   # noqa: F401
+from stdnum.nz import ird as business_tin  # noqa: F401
