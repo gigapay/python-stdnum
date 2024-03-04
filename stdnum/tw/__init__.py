@@ -22,3 +22,5 @@
 
 # provide aliases
 from stdnum.tw import ubn as vat  # noqa: F401
+from stdnum.tw import ubn as business_tin  # noqa: F401
+
