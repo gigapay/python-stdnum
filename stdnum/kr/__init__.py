@@ -22,3 +22,5 @@
 
 # provide aliases
 from stdnum.kr import brn as vat  # noqa: F401
+from stdnum.kr import brn as business_tin  # noqa: F401
+from stdnum.kr import rrn as personal_tin  # noqa: F401
