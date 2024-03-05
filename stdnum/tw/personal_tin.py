@@ -58,8 +58,8 @@ def validate(number):
     if len(number) != 10:
         raise InvalidLength()
     if isdigits(number[1]):
-        # if the second digit is a number we now that it is no a UI Number
-        # there for it must be a National ID Card Number
+        # if the second digit is a number we now that it is not a UI Number
+        # therefor it must be a National ID Card Number
         nidcn.validate(number)
     elif not isdigits(number[1]):
         # UI Number
