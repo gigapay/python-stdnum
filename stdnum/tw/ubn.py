@@ -42,6 +42,7 @@ InvalidLength: ...
 >>> format(' 0050150 3 ')
 '00501503'
 """
+import math
 
 from stdnum.exceptions import *
 from stdnum.util import clean, isdigits

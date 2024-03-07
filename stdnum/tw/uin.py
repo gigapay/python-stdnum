@@ -34,6 +34,8 @@ Traceback (most recent call last):
 InvalidLength: ...
 """
 
+import math
+
 from stdnum.exceptions import *
 from stdnum.util import clean, isdigits
 
