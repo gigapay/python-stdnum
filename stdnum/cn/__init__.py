@@ -22,3 +22,5 @@
 
 # Provide vat as an alias.
 from stdnum.cn import uscc as vat  # noqa: F401
+from stdnum.cn import uscc as business_tin  # noqa: F401
+from stdnum.cn import ric as personal_tin  # noqa: F401
