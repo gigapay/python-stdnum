@@ -25,6 +25,8 @@ def is_valid_format(nric):
 def calculate_checksum(number):
     """
     Calculate the checksum for a given NRIC first character and digit string.
+
+    Source: https://github.com/samliew/singapore-nric
     """
     firstchar = number[0]
     weights = [2, 7, 6, 5, 4, 3, 2]
