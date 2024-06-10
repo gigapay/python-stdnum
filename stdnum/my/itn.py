@@ -28,20 +28,21 @@ assessment to the Director General of Inland Revenue.
 The ITN is unique to a person and is not assigned to another person. Individuals are not
 automatically issued with TIN. TIN is only issued either on request, on registration exercise by
 the tax authority or on employment when their employer request for their registration.
+
 The ITN consist of maximum twelve or thirteen alphanumeric characters with a combination of
 the Type of File Number and the Income Tax Number.
 
-Read more: https://phl.hasil.gov.my/pdf/pdfam/MALAYSIA_TIN_NUMBER_AND_TIN_REGISTRATION_02122020.pdf
+Read more: https://www.hasil.gov.my/media/1iblexbc/malaysia-tin.pdf
 
->>> validate('SG 10234567090')
-'SG10234567090'
->>> validate('C 2584563202')
-'C2584563202'
->>> validate('SG 1234')
+>>> validate('IG115002000')
+'IG115002000'
+>>> validate('C20880050010')
+'C20880050010'
+>>> validate('IG1234')
 Traceback (most recent call last):
     ...
 stdnum.exceptions.InvalidLength: The number has an invalid length.
->>> validate('XX 1234567890')
+>>> validate('XX1234567890')
 Traceback (most recent call last):
     ...
 stdnum.exceptions.InvalidFormat: The number has an invalid format.
@@ -52,16 +53,14 @@ from stdnum.exceptions import InvalidLength, InvalidFormat, ValidationError
 from stdnum.util import clean
 
 # Regular expressions for matching individual and non-individual ITN formats
-_individual_itn_re = re.compile(r'^(SG|OG)\s?\d{10,11}[01]$')
-_non_individual_itn_re = re.compile(r'^(C|CS|D|E|F|FA|PT|TA|TC|TN|TR|TP|TJ|LE)\s?\d{9,10}$')
-
+_individual_itn_re = re.compile(r'^(IG)\d{9,13}$')
+_non_individual_itn_re = re.compile(r'^(C|CS|D|E|F|FA|PT|TA|TC|TN|TR|TP|J|LE)\d{9,11}$')
 
 def compact(number):
     """Convert the ITN number to the minimal representation. This strips the number of any
     valid separators and removes surrounding whitespace."""
     number = clean(number, ' ').upper().strip()
     return number
-
 
 def validate(number):
     """Check if the number is a valid Malaysian ITN number. This checks the length
@@ -71,10 +70,9 @@ def validate(number):
     if _individual_itn_re.match(number) or _non_individual_itn_re.match(number):
         return number
     else:
-        if not (10 <= len(number) <= 13):
+        if not (10 <= len(number) <= 14):
             raise InvalidLength()
         raise InvalidFormat()
-
 
 def is_valid(number):
     """Check if the number is a valid Malaysian ITN number."""
