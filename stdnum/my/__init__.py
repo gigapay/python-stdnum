@@ -21,6 +21,7 @@
 """Collection of Malaysian numbers."""
 
 # provide aliases
-from stdnum.sg import itn as vat  # noqa: F401
-from stdnum.sg import itn as business_tin  # noqa: F401
-from stdnum.sg import nric as personal_tin  # noqa: F401
+from stdnum.my import itn as vat  # noqa: F401
+from stdnum.my import itn as business_tin  # noqa: F401
+from stdnum.my import nric as personal_tin  # noqa: F401
+from stdnum.my import nric as personalid  # noqa: F401
