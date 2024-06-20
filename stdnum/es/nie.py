@@ -42,14 +42,20 @@ InvalidLength: ...
 
 from stdnum.es import dni
 from stdnum.exceptions import *
-from stdnum.util import isdigits
+from stdnum.util import isdigits, clean
 
 
 __all__ = ['compact', 'calc_check_digit', 'validate', 'is_valid']
 
 
 # use the same compact function as DNI
-compact = dni.compact
+def compact(number):
+    """Convert the number to the minimal representation. This strips the
+    number of any valid separators and removes surrounding whitespace."""
+    number = clean(number, " -").upper().strip()
+    if number.startswith("ES"):
+        number = number[2:]
+    return dni.compact(number)
 
 
 def calc_check_digit(number):
