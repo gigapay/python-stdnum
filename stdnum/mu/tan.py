@@ -54,7 +54,7 @@ def validate(number):
     number = compact(number)
     if len(number) != 8:
         raise InvalidLength()
-    if not _nid_re.match(number):
+    if not _tan_re.match(number):
         raise InvalidFormat()
     return number
 
