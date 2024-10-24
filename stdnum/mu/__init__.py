@@ -19,3 +19,6 @@
 # 02110-1301 USA
 
 """Collection of Mauritian numbers."""
+from stdnum.mu import tan as business_tin  # noqa: F401
+from stdnum.mu import nid as personal_tin  # noqa: F401
+from stdnum.mu import tan as vat  # noqa: F401
