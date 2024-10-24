@@ -20,7 +20,7 @@
 
 """Tax Account Number (Mauritian tax account number).
 
-The Mauritian tax account number is a unique 8 figit numeric identifier
+The Mauritian tax account number is a unique 8 digit numeric identifier
 
 As soon as they are created, the Mauritian entities (and individuals
 carrying out business activities) have an identification number, the Business
