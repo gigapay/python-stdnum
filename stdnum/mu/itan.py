@@ -39,7 +39,7 @@ import re
 from stdnum.exceptions import *
 from stdnum.util import clean
 
-_tan_re = re.compile('^[1579][0-9]{7}$')
+_tan_re = re.compile('^[1578][0-9]{7}$')
 
 
 def compact(number):
