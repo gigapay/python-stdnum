@@ -1,0 +1,30 @@
+>>> from stdnum.ae import trn
+
+>>> trn.validate('123456789012345')
+'123456789012345'
+>>> trn.is_valid('123456789012345')
+True
+>>> trn.validate('1234-5678901-2345')
+'123456789012345'
+>>> trn.is_valid('1234-5678901-2345')
+True
+>>> trn.validate(' 1234-5678901-2345 ')
+'123456789012345'
+>>> trn.is_valid(' 1234-5678901-2345 ')
+True
+>>> trn.validate(' 1234-5678901-2 345 ')
+'123456789012345'
+>>> trn.is_valid(' 1234-5678901-2 345 ')
+True
+>>> trn.validate('1234567890123456')
+Traceback (most recent call last):
+    ...
+stdnum.exceptions.InvalidLength: The number has an invalid length.
+>>> trn.is_valid('1234567890123456')
+False
+>>> trn.validate('12345678901234A')
+Traceback (most recent call last):
+    ...
+stdnum.exceptions.InvalidFormat: The number has an invalid format.
+>>> trn.is_valid('1234-567890123456')
+False
