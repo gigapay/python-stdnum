@@ -23,4 +23,4 @@
 # provide aliases
 from stdnum.sa import vat_number as vat  # noqa: F401
 from stdnum.sa import tin_number as business_tin  # noqa: F401
-from stdnum.sa import tin_number as personal_tin  # noqa: F401
+from stdnum.sa import nid as personal_tin  # noqa: F401
