@@ -1,0 +1,30 @@
+>>> from stdnum.ae import eid
+
+>>> eid.validate('123456789012345')
+'123456789012345'
+>>> eid.is_valid('123456789012345')
+True
+>>> eid.validate('1234-5678901-2345')
+'123456789012345'
+>>> eid.is_valid('1234-5678901-2345')
+True
+>>> eid.validate(' 1234-5678901-2345 ')
+'123456789012345'
+>>> eid.is_valid(' 1234-5678901-2345 ')
+True
+>>> eid.validate(' 1234-5678901-2 345 ')
+'123456789012345'
+>>> eid.is_valid(' 1234-5678901-2 345 ')
+True
+>>> eid.validate('1234567890123456')
+Traceback (most recent call last):
+    ...
+stdnum.exceptions.InvalidLength: The number has an invalid length.
+>>> eid.is_valid('1234567890123456')
+False
+>>> eid.validate('12345678901234A')
+Traceback (most recent call last):
+    ...
+stdnum.exceptions.InvalidFormat: The number has an invalid format.
+>>> eid.is_valid('1234-567890123456')
+False
