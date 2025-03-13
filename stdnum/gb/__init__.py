@@ -19,3 +19,5 @@
 # 02110-1301 USA
 
 """Collection of United Kingdom numbers."""
+
+from stdnum.gb import nin as personal_tin  # noqa: F401
