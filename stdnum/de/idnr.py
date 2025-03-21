@@ -53,9 +53,8 @@ from stdnum.util import clean, isdigits
 
 
 def compact(number):
-    """Convert the number to the minimal representation. This strips the
-    number of any valid separators and removes surrounding whitespace."""
-    return clean(number, ' -./,').strip()
+    """Convert the number to the minimal representation. It shouldn't have any separators."""
+    return clean(number, '').strip()
 
 
 def validate(number):
