@@ -44,7 +44,7 @@ def get_country_codes(line):
 
 
 if __name__ == '__main__':
-    response = requests.get(download_url)
+    response = requests.get(download_url, timeout=30)
     response.raise_for_status()
     print('# generated from swift_standards_infopaper_ibanregistry_1.txt,')
     print('# downloaded from %s' % download_url)
@@ -57,9 +57,9 @@ if __name__ == '__main__':
             for i, c in enumerate(row[1:]):
                 values[i][row[0]] = c
     # output the collected data
-    for i, data in values.items():
+    for _i, data in values.items():
         bban = data['BBAN structure']
-        if not(bban) or bban.lower() == 'n/a':
+        if not bban or bban.lower() == 'n/a':
             bban = data['IBAN structure']
         bban = bban.replace(' ', '')
         cc = data['IBAN prefix country code (ISO 3166)'][:2]

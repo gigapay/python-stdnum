@@ -2,6 +2,7 @@
 # coding: utf-8
 #
 # Copyright (C) 2012 Arthur de Jong
+# Copyright (C) 2022 Blaž Bregar
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -20,7 +21,9 @@
 
 """Collection of Slovenian numbers."""
 
-# provide vat as an alias
+# provide aliases
 from stdnum.si import ddv as vat  # noqa: F401
 from stdnum.si import ddv as business_tin  # noqa: F401
 from stdnum.si import ddv as personal_tin  # noqa: F401
+from stdnum.si import emso as personalid  # noqa: F401
+from stdnum.si import maticna as businessid  # noqa: F401
