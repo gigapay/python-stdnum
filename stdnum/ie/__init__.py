@@ -21,4 +21,5 @@
 """Collection of Irish numbers."""
 
 from stdnum.ie import pps as personal_tin  # noqa: F401
+from stdnum.ie import pps as personalid  # noqa: F401
 from stdnum.ie import vat as business_tin  # noqa: F401
