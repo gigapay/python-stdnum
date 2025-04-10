@@ -23,4 +23,5 @@
 # provide vat as an alias
 from stdnum.it import iva as vat  # noqa: F401
 from stdnum.it import codicefiscale as personal_tin  # noqa: F401
+from stdnum.it import codicefiscale as personalid  # noqa: F401
 from stdnum.it import codicefiscale as business_tin  # noqa: F401
