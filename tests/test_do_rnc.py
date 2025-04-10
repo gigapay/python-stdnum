@@ -1,7 +1,7 @@
 # test_do_rnc.py - functions for testing the online RNC validation
 # coding: utf-8
 #
-# Copyright (C) 2017 Arthur de Jong
+# Copyright (C) 2017-2023 Arthur de Jong
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -36,6 +36,14 @@ class TestDGII(unittest.TestCase):
     """Test the web services provided by the the Dirección General de
     Impuestos Internos (DGII), the Dominican Republic tax department."""
 
+    # Theses tests currently fail because the SOAP service at
+    # https://www.dgii.gov.do/wsMovilDGII/WSMovilDGII.asmx?WSDL
+    # is no longer available. There is a new one at
+    # https://www.dgii.gov.do/ventanillaunica/ventanillaunica.asmx?WSDL
+    # but it has a different API and seems to require authentication.
+    # See https://github.com/arthurdejong/python-stdnum/pull/462
+    # and https://github.com/arthurdejong/python-stdnum/issues/461
+    @unittest.expectedFailure
     def test_check_dgii(self):
         """Test stdnum.do.rnc.check_dgii()"""
         # Test a normal valid number
@@ -58,14 +66,22 @@ class TestDGII(unittest.TestCase):
         result = rnc.check_dgii('132070801')
         self.assertEqual(result['rnc'], '132070801')
 
+    # Theses tests currently fail because the SOAP service at
+    # https://www.dgii.gov.do/wsMovilDGII/WSMovilDGII.asmx?WSDL
+    # is no longer available. There is a new one at
+    # https://www.dgii.gov.do/ventanillaunica/ventanillaunica.asmx?WSDL
+    # but it has a different API and seems to require authentication.
+    # See https://github.com/arthurdejong/python-stdnum/pull/462
+    # and https://github.com/arthurdejong/python-stdnum/issues/461
+    @unittest.expectedFailure
     def test_search_dgii(self):
         """Test stdnum.do.rnc.search_dgii()"""
         # Search for some existing companies
         results = rnc.search_dgii('EXPORT DE')
         self.assertGreaterEqual(len(results), 3)
-        self.assertRegexpMatches(results[0]['rnc'], r'\d{9}')
-        self.assertRegexpMatches(results[1]['rnc'], r'\d{9}')
-        self.assertRegexpMatches(results[2]['rnc'], r'\d{9}')
+        self.assertRegex(results[0]['rnc'], r'\d{9}')
+        self.assertRegex(results[1]['rnc'], r'\d{9}')
+        self.assertRegex(results[2]['rnc'], r'\d{9}')
         # Check maximum rows parameter
         two_results = rnc.search_dgii('EXPORT DE', end_at=2)
         self.assertEqual(len(two_results), 2)

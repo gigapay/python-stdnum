@@ -2,7 +2,7 @@
 
 # update/gs1_ai.py - script to get GS1 application identifiers
 #
-# Copyright (C) 2019 Arthur de Jong
+# Copyright (C) 2019-2024 Arthur de Jong
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -42,16 +42,22 @@ def fetch_ais():
     headers = {
         'User-Agent': user_agent,
     }
-    response = requests.get(download_url, headers=headers)
+    response = requests.get(download_url, headers=headers, timeout=30)
     document = lxml.html.document_fromstring(response.content)
     element = document.findall('.//script[@type="application/ld+json"]')[0]
-    for entry in json.loads(element.text)['@graph']:
-        yield (
-            entry['skos:prefLabel'].strip(),             # AI
-            entry['gs1meta:formatAIvalue'].strip()[3:],  # format
-            entry['gs1meta:requiresFNC1'],               # require FNC1
-            [x['@value'] for x in entry['schema:name'] if x['@language'] == 'en'][0].strip(),
-            [x['@value'] for x in entry['schema:description'] if x['@language'] == 'en'][0].strip())
+    data = json.loads(element.text)
+    for entry in data['applicationIdentifiers']:
+        if 'applicationIdentifier' in entry:
+            ai = entry['applicationIdentifier'].strip()
+            formatstring = entry['formatString'].strip()
+            if formatstring.startswith(f'N{len(ai)}+'):
+                formatstring = formatstring[3:]
+            yield (
+                ai,
+                formatstring,
+                entry['fnc1required'],
+                entry['label'].strip(),
+                entry['description'].strip())
 
 
 def group_ai_ranges():
@@ -72,7 +78,7 @@ if __name__ == '__main__':
     print('# on %s' % datetime.datetime.utcnow())
     for ai1, ai2, format, require_fnc1, name, description in group_ai_ranges():
         _type = 'str'
-        if re.match(r'^(N8\+)?N[0-9]*[.]*[0-9]+$', format) and 'date' in description.lower():
+        if re.match(r'^(N[68]\[?\+)?N[0-9]*[.]*[0-9]+\]?$', format) and 'date' in description.lower():
             _type = 'date'
         elif re.match(r'^N[.]*[0-9]+$', format) and 'count' in description.lower():
             _type = 'int'

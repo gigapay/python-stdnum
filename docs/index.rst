@@ -126,7 +126,9 @@ Available formats
    au.abn
    au.acn
    au.tfn
+   be.bis
    be.iban
+   be.nn
    be.vat
    bg.egn
    bg.pnf
@@ -136,9 +138,11 @@ Available formats
    br.cnpj
    br.cpf
    by.unp
+   ca.bc_phn
    ca.bn
    ca.sin
    casrn
+   cfi
    ch.esr
    ch.ssn
    ch.uid
@@ -153,6 +157,7 @@ Available formats
    cu.ni
    cusip
    cy.vat
+   cz.bankaccount
    cz.dic
    cz.rc
    de.handelsregisternummer
@@ -165,12 +170,14 @@ Available formats
    do.cedula
    do.ncf
    do.rnc
+   dz.nif
    ean
    ec.ci
    ec.ruc
    ee.ik
    ee.kmkr
    ee.registrikood
+   eg.tn
    es.ccc
    es.cif
    es.cups
@@ -178,11 +185,14 @@ Available formats
    es.iban
    es.nie
    es.nif
+   es.postal_code
    es.referenciacatastral
    eu.at_02
    eu.banknote
+   eu.ecnumber
    eu.eic
    eu.nace
+   eu.oss
    eu.vat
    fi.alv
    fi.associationid
@@ -190,6 +200,7 @@ Available formats
    fi.veronumero
    fi.ytunnus
    figi
+   fo.vn
    fr.nif
    fr.nir
    fr.siren
@@ -200,6 +211,8 @@ Available formats
    gb.upn
    gb.utr
    gb.vat
+   gh.tin
+   gn.nifp
    gr.amka
    gr.vat
    grid
@@ -220,6 +233,7 @@ Available formats
    in_.epic
    in_.gstin
    in_.pan
+   in_.vid
    is_.kennitala
    is_.vsk
    isan
@@ -235,6 +249,7 @@ Available formats
    it.codicefiscale
    it.iva
    jp.cn
+   ke.pin
    kr.brn
    kr.rrn
    lei
@@ -243,11 +258,14 @@ Available formats
    lt.pvm
    lu.tva
    lv.pvn
+   ma.ice
    mac
    mc.tva
    md.idno
    me.iban
+   me.pib
    meid
+   mk.edb
    mt.vat
    mu.nid
    mx.curp
@@ -267,6 +285,7 @@ Available formats
    nz.ird
    pe.cui
    pe.ruc
+   pk.cnic
    pl.nip
    pl.pesel
    pl.regon
@@ -285,6 +304,8 @@ Available formats
    se.vat
    sg.uen
    si.ddv
+   si.emso
+   si.maticna
    sk.dph
    sk.rc
    sm.coe
@@ -292,6 +313,7 @@ Available formats
    th.moa
    th.pin
    th.tin
+   tn.mf
    tr.tckimlik
    tr.vkn
    tw.ubn
@@ -319,3 +341,12 @@ Changes in python-stdnum
    :maxdepth: 2
 
    changes
+
+
+Contributing to python-stdnum
+-----------------------------
+
+.. toctree::
+   :maxdepth: 2
+
+   contributing

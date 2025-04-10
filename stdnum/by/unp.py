@@ -1,7 +1,7 @@
 # unp.py - functions for handling Belarusian UNP numbers
 # coding: utf-8
 #
-# Copyright (C) 2020 Arthur de Jong
+# Copyright (C) 2020-2025 Arthur de Jong
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -42,13 +42,13 @@ InvalidChecksum: ...
 """
 
 from stdnum.exceptions import *
-from stdnum.util import clean, isdigits, to_unicode
+from stdnum.util import clean, isdigits
 
 
 # Mapping of Cyrillic letters to Latin letters
 _cyrillic_to_latin = dict(zip(
-    u'АВЕКМНОРСТ',
-    u'ABEKMHOPCT',
+    'АВЕКМНОРСТ',
+    'ABEKMHOPCT',
 ))
 
 
@@ -56,14 +56,11 @@ def compact(number):
     """Convert the number to the minimal representation. This strips the
     number of any valid separators and removes surrounding whitespace."""
     number = clean(number, ' ').upper().strip()
-    for prefix in ('УНП', u'УНП', 'UNP', u'UNP'):
-        if type(number) == type(prefix) and number.startswith(prefix):
+    for prefix in ('УНП', 'UNP'):
+        if number.startswith(prefix):
             number = number[len(prefix):]
     # Replace Cyrillic letters with Latin letters
-    cleaned = ''.join(_cyrillic_to_latin.get(x, x) for x in to_unicode(number))
-    if type(cleaned) != type(number):  # pragma: no cover (Python2 only)
-        cleaned = cleaned.encode('utf-8')
-    return cleaned
+    return ''.join(_cyrillic_to_latin.get(x, x) for x in number)
 
 
 def calc_check_digit(number):
@@ -104,8 +101,14 @@ def is_valid(number):
         return False
 
 
-def check_nalog(number, timeout=30):  # pragma: no cover (not part of normal test suite)
+def check_nalog(number, timeout=30, verify=True):  # pragma: no cover (not part of normal test suite)
     """Retrieve registration information from the portal.nalog.gov.by web site.
+
+    The `timeout` argument specifies the network timeout in seconds.
+
+    The `verify` argument is either a boolean that determines whether the
+    server's certificate is validate or a string which must be a path the CA
+    certificate bundle to use for verification.
 
     This basically returns the JSON response from the web service as a dict.
     Will return ``None`` if the number is invalid or unknown.
@@ -115,8 +118,6 @@ def check_nalog(number, timeout=30):  # pragma: no cover (not part of normal tes
     # Since the nalog.gov.by web site currently provides an incomplete
     # certificate chain, we provide our own.
     import requests
-    from pkg_resources import resource_filename
-    certificate = resource_filename(__name__, 'portal.nalog.gov.by.crt')
     response = requests.get(
         'https://www.portal.nalog.gov.by/grp/getData',
         params={
@@ -124,6 +125,6 @@ def check_nalog(number, timeout=30):  # pragma: no cover (not part of normal tes
             'charset': 'UTF-8',
             'type': 'json'},
         timeout=timeout,
-        verify=certificate)
-    if response.ok:
-        return response.json()['ROW']
+        verify=verify)
+    if response.ok and response.content:
+        return response.json()['row']
