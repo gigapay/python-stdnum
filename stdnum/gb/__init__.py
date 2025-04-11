@@ -21,3 +21,4 @@
 """Collection of United Kingdom numbers."""
 
 from stdnum.gb import nin as personal_tin  # noqa: F401
+from stdnum.gb import nin as personalid  # noqa: F401

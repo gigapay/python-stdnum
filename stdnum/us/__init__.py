@@ -21,3 +21,4 @@
 """Collection of United States numbers."""
 
 from stdnum.us import ein as business_tin
+from stdnum.us import ssn as personalid

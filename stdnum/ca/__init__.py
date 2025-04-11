@@ -19,6 +19,8 @@
 # 02110-1301 USA
 
 """Collection of Canadian numbers."""
+
 from stdnum.ca import bn as vat  # noqa: F401
 from stdnum.ca import bn as business_tin
 from stdnum.ca import sin as personal_tin
+from stdnum.ca import sin as personalid

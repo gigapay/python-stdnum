@@ -1,0 +1,99 @@
+test_de_ausweisnummer.doctest - more detailed doctests for stdnum.de.ausweisnummer module
+
+Copyright (C) 2025
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+02110-1301 USA
+
+
+This file contains more detailed doctests for the stdnum.de.ausweisnummer module. It
+tries to test more corner cases and detailed functionality that is not really
+useful as module documentation.
+
+>>> from stdnum.de import ausweisnummer
+
+
+Test the basic validation and formatting functions.
+
+>>> ausweisnummer.validate('T220001293')
+'T220001293'
+>>> ausweisnummer.validate('T22000129-3')
+'T220001293'
+>>> ausweisnummer.validate('t220001293')
+'T220001293'
+>>> ausweisnummer.validate('1220001297')
+'1220001297'
+>>> ausweisnummer.format('T220001293')
+'T22000129-3'
+>>> ausweisnummer.format('1220001297')
+'122000129-7'
+
+
+Test ID numbers without check digit.
+
+>>> ausweisnummer.validate('T22000129')
+'T22000129'
+>>> ausweisnummer.validate('122000129')
+'122000129'
+>>> ausweisnummer.format('T22000129')
+'T22000129'
+
+
+Test the calc_check_digit function with examples from Wikipedia.
+
+>>> ausweisnummer.calc_check_digit('T22000129')
+'3'
+>>> ausweisnummer.calc_check_digit('122000129')
+'7'
+
+
+The number should have a valid length (9 or 10 characters).
+
+>>> ausweisnummer.validate('T2200012')  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+InvalidLength
+>>> ausweisnummer.validate('T220001293456')  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+InvalidLength
+
+
+The number should be alphanumeric, and the check digit must be numeric.
+
+>>> ausweisnummer.validate('T22@00129')  # Invalid character  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+InvalidFormat
+>>> ausweisnummer.validate('T22000129A')  # Non-numeric check digit  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+InvalidFormat
+
+
+Check if the validation exceptions work correctly.
+
+>>> ausweisnummer.validate('T220001294')  # Wrong check digit  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+InvalidChecksum
+>>> ausweisnummer.validate('1220001298')  # Wrong check digit  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+InvalidChecksum
+>>> ausweisnummer.is_valid('T220001293')
+True
+>>> ausweisnummer.is_valid('T220001294')
+False 

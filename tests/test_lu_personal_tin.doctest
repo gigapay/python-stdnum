@@ -1,0 +1,127 @@
+test_lu_personal_tin.doctest - more detailed doctests for stdnum.lu.personal_tin module
+
+Copyright (C) 2025
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+02110-1301 USA
+
+
+This file contains more detailed doctests for the stdnum.lu.personal_tin module. It
+tries to test more corner cases and detailed functionality that is not really
+useful as module documentation.
+
+>>> from stdnum.lu import personal_tin
+
+
+Test the basic validation and formatting functions. First, let's generate valid numbers:
+
+# Create a test ID for someone born on January 1, 1990 with sequence number 001
+>>> base = '1990010100'
+>>> checks = personal_tin.calc_check_digits(base + '1')
+>>> valid_id = base + '1' + checks[0] + checks[1]
+>>> len(valid_id)
+13
+>>> result = personal_tin.validate(valid_id)
+>>> result == valid_id
+True
+
+# The same number with separators should work
+>>> result_with_sep = personal_tin.validate(valid_id[:4] + '-' + valid_id[4:6] + '-' + valid_id[6:8] + '-' + valid_id[8:])
+>>> result_with_sep == valid_id
+True
+
+# The check digit calculation requires exactly 11 digits
+>>> personal_tin.calc_check_digits('2000060500')  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+InvalidLength
+
+>>> personal_tin.calc_check_digits('20000605001234')  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+InvalidLength
+
+>>> checks = personal_tin.calc_check_digits('20000605001')
+>>> len(checks)
+2
+>>> isinstance(checks[0], str)
+True
+>>> isinstance(checks[1], str)
+True
+
+
+The number should have a valid length (13 digits).
+
+>>> personal_tin.validate('19001010012')  # Too short  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+InvalidLength
+
+>>> personal_tin.validate('19900101001211')  # Too long  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+InvalidLength
+
+
+The number should contain a valid date format.
+
+>>> personal_tin.validate('1990130100112')  # Invalid month (13)  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+InvalidFormat
+
+>>> personal_tin.validate(valid_id[:-2] + 'AB')  # Non-numeric  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+InvalidFormat
+
+
+Let's calculate check digits on a known number and verify them.
+
+>>> test_number = '19900101001'
+>>> checks = personal_tin.calc_check_digits(test_number)
+>>> full_number = test_number + checks[0] + checks[1]
+>>> personal_tin.is_valid(full_number)
+True
+
+
+Test with an invalid check digit.
+
+>>> invalid_number = valid_id[:-1] + ('9' if valid_id[-1] != '9' else '8')
+>>> personal_tin.validate(invalid_number)  # Invalid check digits  # doctest: +IGNORE_EXCEPTION_DETAIL
+Traceback (most recent call last):
+    ...
+InvalidChecksum
+
+
+Test the is_valid function.
+
+>>> personal_tin.is_valid(valid_id)
+True
+>>> personal_tin.is_valid(invalid_number)
+False
+
+
+Test that both check digits are correctly verified.
+
+>>> # First check digit wrong
+>>> first_wrong = valid_id[:-2] + ('9' if valid_id[-2] != '9' else '8') + valid_id[-1]
+>>> personal_tin.is_valid(first_wrong)
+False
+
+>>> # Second check digit wrong
+>>> second_wrong = valid_id[:-1] + ('9' if valid_id[-1] != '9' else '8')
+>>> personal_tin.is_valid(second_wrong)
+False

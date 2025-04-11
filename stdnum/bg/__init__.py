@@ -21,4 +21,5 @@
 """Collection of Bulgarian numbers."""
 
 from stdnum.bg import egn as personal_tin  # noqa: F401
+from stdnum.bg import egn as personalid  # noqa: F401
 from stdnum.bg import vat as business_tin  # noqa: F401
