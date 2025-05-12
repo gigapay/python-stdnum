@@ -22,7 +22,7 @@
 Memorandum of Association Number (aka Company's Taxpayer Identification
 Number) are numbers issued by the Department of Business Development.
 
-The number consists of 13 digits of which the last is a check digit following
+The number consists of 13/15 digits of which the last is a check digit following
 the same algorithm as in the Personal Identity Number (PIN). It uses a
 different grouping format and always starts with zero to indicate that the
 number issued by DBD.
@@ -31,13 +31,13 @@ More information:
 
 * https://www.dbd.go.th/download/pdf_kc/s09/busin_2542-48.pdf
 
->>> compact('0 10 5 536 11201 4')
+>>> compact('0105536112014')
 '0105536112014'
 >>> validate('0994000617721')
 '0994000617721'
->>> validate('0-99-4-000-61772-1')
+>>> validate('0994000617721')
 '0994000617721'
->>> validate('0-99-4-000-61772-3')
+>>> validate('0994000617723')
 Traceback (most recent call last):
     ...
 InvalidChecksum: ...
@@ -60,20 +60,20 @@ calc_check_digit = pin.calc_check_digit
 def compact(number):
     """Convert the number to the minimal representation. This strips the
     number of any valid separators and removes surrounding whitespace."""
-    return clean(number, ' -').strip()
+    return clean(number, '').strip() # separators are not allowed
 
 
 def validate(number):
     """Check if the number is a valid MOA Number. This checks the length,
     formatting, component and check digit."""
     number = compact(number)
-    if len(number) != 13:
+    if len(number) != 13 and len(number) != 15:
         raise InvalidLength()
     if not isdigits(number):
         raise InvalidFormat()
     if number[0] != '0':
         raise InvalidComponent()
-    if number[-1] != calc_check_digit(number):
+    if number[12] != calc_check_digit(number): # 13th digits
         raise InvalidChecksum()
     return number
 

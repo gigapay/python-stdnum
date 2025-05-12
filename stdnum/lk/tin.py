@@ -1,6 +1,6 @@
-# pin.py - functions for handling Thailand PINs
+# tin.py - functions for handling Sri Lankan Personal Tax Identification Number
 #
-# Copyright (C) 2021 Piruin Panichphol
+# Copyright (C) 2023 The python-stdnum contributors
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,61 +17,49 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 # 02110-1301 USA
 
-"""PIN (Thailand Personal Identification Number).
+"""TIN (Sri Lanka Personal Tax Identification Number).
 
-The Thailand Personal Identification Number is a unique personal identifier
-assigned at birth or upon receiving Thai citizenship issue by the Ministry of
-Interior.
+The Tax Identification Number (TIN) is a 9-digit unique identifier 
+issued by the Inland Revenue Department to individuals in Sri Lanka.
 
-This number consists of 13/15 digits which the last is a check digit. Usually
-separated into five groups using hyphens to make it easier to read.
+The number consists of 9 digits with no special formatting.
 
-More information:
 
-* https://en.wikipedia.org/wiki/Thai_identity_card
-
->>> compact('1234545678781')
-'1234545678781'
->>> validate('3100600445635')
-'3100600445635'
->>> validate('1234545678781')
-'1234545678781'
->>> validate('1234545678789')
+>>> compact('123456789')
+'123456789'
+>>> validate('123456789')
+'123456789'
+>>> format('123456789')
+'123456789'
+>>> validate('000000000')
 Traceback (most recent call last):
     ...
-InvalidChecksum: ...
->>> format('7100600445635')
-'7-1006-00445-63-5'
+stdnum.exceptions.InvalidComponent: All-zero TIN is not valid
 """
 
 from stdnum.exceptions import *
 from stdnum.util import clean, isdigits
 
 
+__all__ = ['compact', 'validate', 'is_valid', 'format']
+
+
 def compact(number):
     """Convert the number to the minimal representation. This strips the
     number of any valid separators and removes surrounding whitespace."""
-    return clean(number, '').strip() # separators are not allowed
-
-
-def calc_check_digit(number):
-    """Calculate the check digit."""
-    s = sum((2 - i) * int(n) for i, n in enumerate(number[:12])) % 11
-    return str((1 - s) % 10)
+    return clean(number, '').strip()
 
 
 def validate(number):
-    """Check if the number is a valid PIN. This checks the length,
-    formatting and check digit."""
+    """Check if the number is a valid Sri Lankan personal TIN. This checks the length
+    and ensures it contains only digits."""
     number = compact(number)
-    if len(number) != 13 and len(number) != 15:
+    if len(number) != 9:
         raise InvalidLength()
     if not isdigits(number):
         raise InvalidFormat()
-    if number[0] in ('0', '9'):
-        raise InvalidComponent()
-    if number[12] != calc_check_digit(number):
-        raise InvalidChecksum()
+    if number == '000000000':
+        raise InvalidComponent('All-zero TIN is not valid')
     return number
 
 
@@ -86,5 +74,4 @@ def is_valid(number):
 def format(number):
     """Reformat the number to the standard presentation format."""
     number = compact(number)
-    return '-'.join((
-        number[:1], number[1:5], number[5:10], number[10:12], number[12:]))
+    return number

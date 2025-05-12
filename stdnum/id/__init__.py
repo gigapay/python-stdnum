@@ -22,3 +22,5 @@
 
 # provide aliases
 from stdnum.id import npwp as vat  # noqa: F401
+from stdnum.id import npwp as personal_tin
+from stdnum.id import npwp as business_tin

@@ -45,7 +45,7 @@ More information:
 
 >>> validate('0100233488')
 '0100233488'
->>> validate('0314409058-002')
+>>> validate('0314409058002')
 '0314409058002'
 >>> validate('12345')
 Traceback (most recent call last):
@@ -55,9 +55,9 @@ InvalidLength: ...
 Traceback (most recent call last):
     ...
 InvalidChecksum: ...
->>> format('01.00.112.437')
+>>> format('0100112437')
 '0100112437'
->>> format('0312 68 78 78 - 001')
+>>> format('0312687878001')
 '0312687878-001'
 """
 
@@ -71,7 +71,7 @@ def compact(number):
     This strips the number of any valid separators and removes surrounding
     whitespace.
     """
-    return clean(number, ' -.').strip()
+    return clean(number, '').strip() # separators are not allowed
 
 
 def calc_check_digit(number):
