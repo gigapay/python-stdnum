@@ -24,6 +24,9 @@ issued by the Inland Revenue Department to individuals in Sri Lanka.
 
 The number consists of 9 digits with no special formatting.
 
+source: 
+https://www.notion.so/gigapay/Payment-Recipient-Market-Implementation-1bd3b97583a080e89b8bc72ba1c471a5?p=1d03b97583a080498bf6fada0d660a1b&pm=s
+
 
 >>> compact('123456789')
 '123456789'
