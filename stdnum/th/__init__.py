@@ -19,3 +19,6 @@
 # 02110-1301 USA
 
 """Collection of Thai numbers."""
+from stdnum.th import pin as personal_tin
+from stdnum.th import tin as business_tin
+from stdnum.th import moa as vat

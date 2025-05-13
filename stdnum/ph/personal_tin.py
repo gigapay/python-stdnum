@@ -1,6 +1,6 @@
-# pin.py - functions for handling Thailand PINs
+# personal_tin.py - functions for handling Philippine Personal Nombor ChukaiPendapatan (Personal Tax ID Number)
 #
-# Copyright (C) 2021 Piruin Panichphol
+# Copyright (C) 2023 The python-stdnum contributors
 #
 # This library is free software; you can redistribute it and/or
 # modify it under the terms of the GNU Lesser General Public
@@ -17,35 +17,32 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 # 02110-1301 USA
 
-"""PIN (Thailand Personal Identification Number).
+"""Personal NCP (Philippines Personal Tax Identification Number).
 
-The Thailand Personal Identification Number is a unique personal identifier
-assigned at birth or upon receiving Thai citizenship issue by the Ministry of
-Interior.
+The Personal Tax Identification Number (TIN), also known as Nombor ChukaiPendapatan, 
+is a unique identifier issued by the Bureau of Internal Revenue (BIR) to 
+individuals in the Philippines.
 
-This number consists of 13/15 digits which the last is a check digit. Usually
-separated into five groups using hyphens to make it easier to read.
+The number consists of 12 digits in the format XXX-XXX-XXX-XXX where the first
+9 digits are the base number and the last 3 digits are branch codes (000 for individuals).
 
 More information:
 
-* https://en.wikipedia.org/wiki/Thai_identity_card
+* https://www.bir.gov.ph/primary-registration
 
->>> compact('1234545678781')
-'1234545678781'
->>> validate('3100600445635')
-'3100600445635'
->>> validate('1234545678781')
-'1234545678781'
->>> validate('1234545678789')
-Traceback (most recent call last):
-    ...
-InvalidChecksum: ...
->>> format('7100600445635')
-'7-1006-00445-63-5'
+>>> compact('123456789000')
+'123456789000'
+>>> validate('123456789000')
+'123456789000'
+>>> format('123456789000')
+'123-456-789-000'
 """
 
 from stdnum.exceptions import *
 from stdnum.util import clean, isdigits
+
+
+__all__ = ['compact', 'validate', 'is_valid', 'format']
 
 
 def compact(number):
@@ -54,24 +51,16 @@ def compact(number):
     return clean(number, '').strip() # separators are not allowed
 
 
-def calc_check_digit(number):
-    """Calculate the check digit."""
-    s = sum((2 - i) * int(n) for i, n in enumerate(number[:12])) % 11
-    return str((1 - s) % 10)
-
-
 def validate(number):
-    """Check if the number is a valid PIN. This checks the length,
-    formatting and check digit."""
+    """Check if the number is a valid Philippines personal TIN. This checks the length,
+    formatting and digits."""
     number = compact(number)
-    if len(number) != 13 and len(number) != 15:
+    if len(number) != 12:
         raise InvalidLength()
     if not isdigits(number):
         raise InvalidFormat()
-    if number[0] in ('0', '9'):
-        raise InvalidComponent()
-    if number[12] != calc_check_digit(number):
-        raise InvalidChecksum()
+    if number[9:12] != '000':
+        raise InvalidComponent('Personal TIN should end with 000')
     return number
 
 
@@ -86,5 +75,4 @@ def is_valid(number):
 def format(number):
     """Reformat the number to the standard presentation format."""
     number = compact(number)
-    return '-'.join((
-        number[:1], number[1:5], number[5:10], number[10:12], number[12:]))
+    return '-'.join((number[0:3], number[3:6], number[6:9], number[9:12]))

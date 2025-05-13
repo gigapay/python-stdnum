@@ -64,7 +64,7 @@ def compact(number):
     This strips the number of any valid separators and removes
     surrounding whitespace.
     """
-    return clean(number, ' -.').strip()
+    return clean(number, '').strip() # separators are not allowed
 
 
 def validate(number):

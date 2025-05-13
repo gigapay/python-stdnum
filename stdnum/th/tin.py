@@ -25,20 +25,20 @@ This number consists of 13 digits which the last is a check digit.
 Personal income taxpayers use Personal Identification Number (PIN) while
 companies use Memorandum of Association (MOA).
 
->>> validate('1-2345-45678-78-1')
+>>> validate('1234545678781')
 '1234545678781'
->>> validate('0-99-4-000-61772-1')
+>>> validate('0994000617721')
 '0994000617721'
 >>> validate('1234545678789')
 Traceback (most recent call last):
     ...
 InvalidFormat: ...
->>> tin_type('1-2345-45678-78-1')
+>>> tin_type('1234545678781')
 'pin'
->>> tin_type('0-99-4-000-61772-1')
+>>> tin_type('0994000617721')
 'moa'
 >>> format('3100600445635')
-'3-1006-00445-63-5'
+'3100600445635'
 >>> format('0993000133978')
 '0-99-3-000-13397-8'
 """
@@ -54,7 +54,7 @@ _tin_modules = (moa, pin)
 def compact(number):
     """Convert the number to the minimal representation. This strips the
     number of any valid separators and removes surrounding whitespace."""
-    return clean(number, ' -').strip()
+    return clean(number, '').strip() # separators are not allowed
 
 
 def tin_type(number):
