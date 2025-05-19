@@ -22,3 +22,5 @@
 
 # provide vat as an alias
 from stdnum.ma import ice as vat  # noqa: F401
+from stdnum.ma import ice as business_tin
+from stdnum.ma import nif as personal_tin
