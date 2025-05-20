@@ -19,3 +19,7 @@
 # 02110-1301 USA
 
 """Collection of South Africa numbers."""
+
+from stdnum.za import tin as personal_tin
+from stdnum.za import business_tin
+from stdnum.za import vat
