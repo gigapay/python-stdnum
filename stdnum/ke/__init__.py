@@ -21,4 +21,6 @@
 """Collection of Kenyan numbers."""
 
 # provide aliases
-from stdnum.ke import pin as vat  # noqa: F401
+from stdnum.ke import pin_personal as personal_tin
+from stdnum.ke import pin_business as business_tin
+from stdnum.ke import pin_business as vat

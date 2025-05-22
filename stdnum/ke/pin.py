@@ -41,11 +41,11 @@ More information:
 >>> validate('12345')
 Traceback (most recent call last):
     ...
-InvalidLength: ...
+stdnum.exceptions.InvalidLength: The number has an invalid length.
 >>> validate('V1234567890')
 Traceback (most recent call last):
     ...
-InvalidFormat: ...
+stdnum.exceptions.InvalidFormat: The number has an invalid format.
 >>> format('a004416331m')
 'A004416331M'
 """
@@ -65,7 +65,7 @@ _pin_re = re.compile(r'^[A|P]{1}[0-9]{9}[A-Z]{1}$')
 def compact(number):
     """Convert the number to the minimal representation. This strips the
     number of any valid separators and removes surrounding whitespace."""
-    return clean(number, ' -').strip().upper()
+    return clean(number, '').strip().upper()
 
 
 def validate(number):

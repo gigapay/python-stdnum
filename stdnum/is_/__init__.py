@@ -23,3 +23,5 @@
 # provide aliases
 from stdnum.is_ import kennitala as personalid  # noqa: F401
 from stdnum.is_ import vsk as vat  # noqa: F401
+from stdnum.is_ import business_tin 
+from stdnum.is_ import personal_tin

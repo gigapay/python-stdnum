@@ -22,3 +22,5 @@
 
 # provide aliases
 from stdnum.tn import mf as vat  # noqa: F401
+from stdnum.tn import mf as business_tin
+from stdnum.tn import mf as personal_tin

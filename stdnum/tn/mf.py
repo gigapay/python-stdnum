@@ -45,21 +45,21 @@ More information:
 
 >>> validate('1234567/M/A/E/001')
 '1234567MAE001'
->>> validate('1282182 W')
+>>> validate('1282182/W')
 '1282182W'
 >>> validate('121J')
 '0000121J'
 >>> validate('1219773U')
 Traceback (most recent call last):
     ...
-InvalidFormat: ...
+stdnum.exceptions.InvalidFormat: The number has an invalid format.
 >>> validate('1234567/M/A/X/000')
 Traceback (most recent call last):
     ...
-InvalidFormat: ...
+stdnum.exceptions.InvalidFormat: The number has an invalid format.
 >>> format('121J')
 '0000121/J'
->>> format('1496298 T P N 000')
+>>> format('1496298T/P/N/000')
 '1496298/T/P/N/000'
 """
 
@@ -82,7 +82,7 @@ def compact(number):
     This strips the number of any valid separators, removes surrounding
     whitespace.
     """
-    number = clean(number, ' /.-').upper()
+    number = clean(number, '/').upper()
     # Zero pad the numeric serial to length 7
     match = re.match(r'^(?P<serial>[0-9]+)(?P<rest>.*)$', number)
     if match:
