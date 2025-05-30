@@ -2,4 +2,4 @@
 
 from stdnum.bh import crn as business_tin
 from stdnum.bh import vat
-# No personal_tin
+from stdnum.bh import nid as personal_tin
