@@ -20,5 +20,6 @@
 
 """Collection of Serbian numbers."""
 
-# provide vat as an alias
+from stdnum.rs import jmbg as personal_tin  # noqa: F401
+from stdnum.rs import pib as business_tin  # noqa: F401
 from stdnum.rs import pib as vat  # noqa: F401
