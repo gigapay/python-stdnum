@@ -1,0 +1,66 @@
+test_rs_jmbg.doctest - more detailed doctests for the stdnum.rs.jmbg module
+
+Copyright (C) 2025 Arthur de Jong
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+02110-1301 USA
+
+
+This file contains more detailed doctests for the stdnum.rs.jmbg module.
+
+>>> from stdnum.rs import jmbg
+>>> from stdnum.exceptions import *
+
+
+Test basic functionality with a known valid JMBG number:
+
+>>> jmbg.validate('0101006500005')
+'0101006500005'
+>>> jmbg.is_valid('0101006500005')
+True
+
+
+Test invalid cases:
+
+>>> jmbg.is_valid('123456789012')  # Invalid length
+False
+>>> jmbg.is_valid('0101006500006')  # Invalid checksum
+False
+>>> jmbg.is_valid('01010065000AB')  # Invalid format
+False
+
+
+Test compact function:
+
+>>> jmbg.compact('01 01 006 500 005')
+'0101006500005'
+>>> jmbg.compact('01-01-006-500-005')
+'0101006500005'
+
+
+Test some valid JMBG numbers:
+
+>>> numbers = '''
+...
+... 0101006500005
+... 0101965500001
+... 0101980500007
+... 2707962700075
+... 1201976700067
+... 1506978700013
+... 
+... '''
+>>> [x for x in numbers.splitlines() if x and not jmbg.is_valid(x)]
+[]
