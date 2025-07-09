@@ -19,6 +19,8 @@
 # 02110-1301 USA
 
 """Collection of Japanese numbers."""
+
 from stdnum.jp import cn as vat  # noqa: F401
 from stdnum.jp import cn as business_tin  # noqa: F401
 from stdnum.jp import my_number as personal_tin
+from stdnum.jp import my_number as personalid

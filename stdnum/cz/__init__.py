@@ -24,3 +24,4 @@
 from stdnum.cz import dic as vat  # noqa: F401
 from stdnum.cz import dic as business_tin  # noqa: F401
 from stdnum.cz import rc as personal_tin  # noqa: F401
+from stdnum.cz import rc as personalid  # noqa: F401

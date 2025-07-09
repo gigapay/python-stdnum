@@ -24,3 +24,4 @@
 from stdnum.cn import uscc as vat  # noqa: F401
 from stdnum.cn import uscc as business_tin  # noqa: F401
 from stdnum.cn import ric as personal_tin  # noqa: F401
+from stdnum.cn import ric as personalid  # noqa: F401

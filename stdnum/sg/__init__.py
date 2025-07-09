@@ -24,3 +24,4 @@
 from stdnum.sg import uen as vat  # noqa: F401
 from stdnum.sg import uen as business_tin  # noqa: F401
 from stdnum.sg import nric as personal_tin  # noqa: F401
+from stdnum.sg import nric as personalid  # noqa: F401
